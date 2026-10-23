@@ -1,0 +1,1 @@
+public enum HaggleResult { Improved, FinalOffer, WalkedAway }

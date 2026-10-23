@@ -1,0 +1,1 @@
+public enum CustomerClass { Low, Mid, High }
