@@ -28,6 +28,7 @@ public class ShapeBuilder
     {
         GameObject shapeObject = GameObject.CreatePrimitive(GetPrimitive(type));
         shapeObject.name = $"{type} [{perfectness}%]";
+        shapeObject.GetComponent<Renderer>().sharedMaterial = GameManager.Instance.shapeMaterial;
 
         ApplyImperfectLook(shapeObject);
 

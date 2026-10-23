@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     // Price of one hexagon, as a % of today's 100% Square price
     // An average hexagon gives a ~52% shape, so 0.35 leaves room for profit
     public float hexagonCostPercent = 0.35f;
+    public Material shapeMaterial;
 
     [Header("Live stats")]
     [SerializeField] private GamePhase phase = GamePhase.ChooseDifficulty;

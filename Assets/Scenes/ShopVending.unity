@@ -2883,6 +2883,7 @@ MonoBehaviour:
   dailyPriceSwing: {x: 0.8, y: 1.3}
   freeHexagonsAtStart: 3
   hexagonCostPercent: 0.35
+  shapeMaterial: {fileID: 2100000, guid: 879cd7dafed5fdd4c98ca35d3da8358e, type: 2}
   phase: 0
   day: 0
   currentHour: 0
