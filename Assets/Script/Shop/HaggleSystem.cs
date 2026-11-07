@@ -1,7 +1,5 @@
 using UnityEngine;
 
-// The deal you're making with the customer you clicked.
-// GameUI draws the window and calls Accept / Haggle / Refuse.
 public class HaggleSystem
 {
     public Customer Customer { get; private set; }
@@ -103,14 +101,7 @@ public class HaggleSystem
         }
     }
 
-    public void Refuse()
-    {
-        if (!IsOpen) return;
-        Customer.Say("Hmph.");
-        EndDeal();
-    }
-
-    // Used at closing time / restart.
+    // Used by the Refuse button, closing time and restart.
     public void Close()
     {
         if (IsOpen) EndDeal();

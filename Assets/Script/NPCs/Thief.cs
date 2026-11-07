@@ -48,23 +48,16 @@ public class Thief : NPC, IInteractable
         MoveSpeed = normalSpeed * fleeSpeedMultiplier;
     }
 
-    public void OnClicked()
+    public ShapeItem GiveBackShape()
     {
-        if (CurrentState is ThiefFleeState) Catch();
-    }
-
-    private void Catch()
-    {
-        GameManager gm = GameManager.Instance;
-        gm.inventory.ReturnStolen(StolenShape);
+        ShapeItem shape = StolenShape;
         StolenShape = null;
-        gm.Stats.thievesCaught++;
-        gm.ui.ShowMessage("Thief caught! Shape recovered.");
-
-        Say("Busted...");
         MoveSpeed = normalSpeed;
-        LeaveShop(); // a caught thief walks out empty-handed and can't be clicked again
+        return shape;
     }
+
+    public ICommand GetLeftClickCommand() { return new CatchThiefCommand(this); }
+    public ICommand GetRightClickCommand() { return new SendAwayCommand(this); }
 
     // Got out the door with your shape
     public override void OnLeftShop()

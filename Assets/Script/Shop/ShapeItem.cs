@@ -35,19 +35,25 @@ public class ShapeItem : MonoBehaviour, IInteractable
         return Mathf.Round(marketPrice * Perfectness / 100f);
     }
 
-    public void OnClicked()
+    public ICommand GetLeftClickCommand()
     {
-        // A shape held by a thief or a customer: treat the click as clicking that person.
-        if (IsStolen || SlotIndex < 0)
-        {
-            IInteractable holder = transform.parent != null
-                ? transform.parent.GetComponentInParent<IInteractable>()
-                : null;
-            if (holder != null) holder.OnClicked();
-            return;
-        }
+        if (IsOnYourTable) return new MoveShapeCommand(this, GameManager.Instance.inventory);
 
-        GameManager gm = GameManager.Instance;
-        gm.RunCommand(new MoveShapeCommand(this, gm.inventory));
+        IInteractable holder = GetHolder();
+        return holder != null ? holder.GetLeftClickCommand() : null;
+    }
+
+    public ICommand GetRightClickCommand()
+    {
+        IInteractable holder = GetHolder();
+        return holder != null ? holder.GetRightClickCommand() : null;
+    }
+
+    private bool IsOnYourTable => !IsStolen && SlotIndex >= 0;
+
+    // A shape held by a thief or a customer: treat the click as clicking that person.
+    private IInteractable GetHolder()
+    {
+        return transform.parent != null ? transform.parent.GetComponentInParent<IInteractable>() : null;
     }
 }

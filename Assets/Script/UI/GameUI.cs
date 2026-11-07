@@ -79,7 +79,11 @@ public class GameUI : MonoBehaviour
     // Haggle panel buttons
     public void AcceptDeal() { GameManager.Instance.Haggle.Accept(); }
     public void HaggleDeal() { GameManager.Instance.Haggle.Haggle(); }
-    public void RefuseDeal() { GameManager.Instance.Haggle.Refuse(); }
+    public void RefuseDeal()
+    {
+        Customer customer = GameManager.Instance.Haggle.Customer;
+        if (customer != null) new SendAwayCommand(customer).Execute();
+    }
 
     // Report panel buttons
     public void NextDay() { GameManager.Instance.GoToNextDay(); }

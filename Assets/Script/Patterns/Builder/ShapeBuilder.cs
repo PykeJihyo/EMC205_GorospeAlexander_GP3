@@ -61,7 +61,7 @@ public class ShapeBuilder
             1f + Random.Range(-maxDistortion, maxDistortion),
             1f + Random.Range(-maxDistortion, maxDistortion));
 
-        if (type == ShapeType.Rectangle) scale.x *= 1.8f;
+        if (type == ShapeType.Triangle) scale.x *= 1.8f;
 
         shapeObject.transform.localScale = scale * 0.8f;
     }

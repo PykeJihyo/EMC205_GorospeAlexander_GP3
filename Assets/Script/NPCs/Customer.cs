@@ -150,8 +150,6 @@ public class Customer : NPC, IInteractable
         mat.SetColor("_EmissionColor", isGlowing ? glowColor * glowIntensity : Color.black);
     }
 
-    public void OnClicked()
-    {
-        if (IsReady) GameManager.Instance.Haggle.Open(this);
-    }
+    public ICommand GetLeftClickCommand() { return new StartHaggleCommand(this); }
+    public ICommand GetRightClickCommand() { return new SendAwayCommand(this); }
 }

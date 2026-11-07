@@ -228,10 +228,4 @@ public class GameManager : MonoBehaviour
         inventory.TryAdd(shape);                        // goes to the Inventory Table
         return shape;
     }
-
-    // Runs a player action that was wrapped as a Command object (see MoveShapeCommand).
-    public void RunCommand(ICommand command)
-    {
-        command.Execute();
-    }
 }
