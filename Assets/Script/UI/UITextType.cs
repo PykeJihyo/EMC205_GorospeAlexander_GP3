@@ -1,7 +1,6 @@
 public enum UITextType
 {
     Time = 1,                // "2:35 PM"
-    DayInfo = 2,             // day, money, sales / quota
     CheckInventoryLabel = 3, // put on the text INSIDE the Check Inventory button
     Market = 4,
     Hexagon = 5,

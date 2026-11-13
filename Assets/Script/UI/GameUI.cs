@@ -133,9 +133,6 @@ public class GameUI : MonoBehaviour
             case UITextType.Time:
                 return FormatClock(gm.CurrentHour);
 
-            case UITextType.DayInfo:
-                return $"Day {gm.Day}   |   Money: ${gm.Money:0}   |   Sales: ${gm.Stats.salesRevenue:0} / ${gm.Quota:0}";
-
             case UITextType.CheckInventoryLabel:
                 return gm.cameraController.IsLookingAtInventory ? "Back to Store" : "Check Inventory";
 

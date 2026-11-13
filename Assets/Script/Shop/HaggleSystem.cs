@@ -54,9 +54,7 @@ public class HaggleSystem
             ShapeItem shape = Customer.WantedShape;
             float trueValue = shape.GetTrueValue();
 
-            gm.AddMoney(price);
-            stats.salesRevenue += price;
-            stats.shapesSold++;
+            gm.RecordSale(price);
             stats.lossFromUnderselling += Mathf.Max(0f, trueValue - price);
 
             gm.inventory.SellShape(shape);

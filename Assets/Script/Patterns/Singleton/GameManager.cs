@@ -52,6 +52,11 @@ public class GameManager : MonoBehaviour
     public bool PassedQuota { get; private set; }
     public HaggleSystem Haggle { get; private set; }
 
+    // MVVM Model events: the HudViewModel listens to these.
+    public event System.Action MoneyChanged;
+    public event System.Action SalesChanged;
+    public event System.Action DayStarted;
+
     private readonly Dictionary<ShapeType, float> marketPrices = new Dictionary<ShapeType, float>();
 
     // A thief's chance: you're looking at the Inventory Table, haggling, or reading a menu panel.
@@ -115,6 +120,8 @@ public class GameManager : MonoBehaviour
         RollMarketPrices();
         quota = CalculateQuota();
         cameraController.LookAtShop();
+
+        DayStarted?.Invoke(); // ?. = safe if nobody is listening
     }
 
     // "Open Store" button.
@@ -193,13 +200,23 @@ public class GameManager : MonoBehaviour
     public void AddMoney(float amount)
     {
         money += amount;
+        MoneyChanged?.Invoke();
     }
 
     public bool TrySpendMoney(float amount)
     {
         if (amount > money) return false;
         money -= amount;
+        MoneyChanged?.Invoke();
         return true;
+    }
+
+    public void RecordSale(float price)
+    {
+        stats.salesRevenue += price;
+        stats.shapesSold++;
+        SalesChanged?.Invoke();
+        AddMoney(price);
     }
 
     private bool ShopIsActive => phase == GamePhase.Preparation || phase == GamePhase.ShopOpen;
