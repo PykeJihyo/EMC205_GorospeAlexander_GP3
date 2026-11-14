@@ -28,6 +28,7 @@ public class GameUI : MonoBehaviour
 
 
     // Choose difficulty buttons
+    // switch statement
     public void ChooseEasy() { GameManager.Instance.StartNewGame(new EasyDifficulty()); }
     public void ChooseMedium() { GameManager.Instance.StartNewGame(new MediumDifficulty()); }
     public void ChooseHard() { GameManager.Instance.StartNewGame(new HardDifficulty()); }
